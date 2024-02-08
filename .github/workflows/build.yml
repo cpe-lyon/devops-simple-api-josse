@@ -41,6 +41,15 @@ jobs:
           context: ./deployment/router
           tags:  ${{secrets.DOCKERHUB_USERNAME}}/tp-devops-httpd:latest
           push: ${{ github.ref == 'refs/heads/main' }}
+
+          
+      - name: Build image and push httpd:extras
+        uses: docker/build-push-action@v3
+        with:
+          context: ./deployment/router
+          file: ./deployment/router/Dockerfile.with-extras
+          tags:  ${{secrets.DOCKERHUB_USERNAME}}/tp-devops-httpd:extras
+          push: ${{ github.ref == 'refs/heads/main' }}
           
       - name: Build image and push front
         uses: docker/build-push-action@v3
